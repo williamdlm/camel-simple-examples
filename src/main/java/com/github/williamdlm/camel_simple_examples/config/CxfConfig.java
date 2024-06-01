@@ -1,7 +1,6 @@
 package com.github.williamdlm.camel_simple_examples.config;
 
 import com.github.williamdlm.camel_simple_examples.soap.HelloService;
-import com.github.williamdlm.camel_simple_examples.soap.HelloServiceImpl;
 import jakarta.xml.ws.Endpoint;
 import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 import org.apache.cxf.Bus;
@@ -11,12 +10,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CfxConfig {
+public class CxfConfig {
 
     @Autowired
     private Bus bus;
     @Autowired
     private HelloService helloService;
+
+    public CxfConfig(Bus bus, HelloService helloService) {
+        this.bus = bus;
+        this.helloService = helloService;
+    }
 
     @Bean
     public Endpoint endpoint() {
@@ -28,7 +32,7 @@ public class CfxConfig {
     @Bean
     public CxfEndpoint helloEndpoint() {
         CxfEndpoint cxfEndpoint = new CxfEndpoint();
-        cxfEndpoint.setAddress("/services/hello");
+        cxfEndpoint.setAddress("/hi");
         cxfEndpoint.setServiceClass(HelloService.class);
         return cxfEndpoint;
     }

@@ -21,25 +21,23 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
 			<version>4.6.0</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.apache.camel.springboot/camel-cxf-soap-starter -->
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-cxf-soap</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-cxf-soap-starter</artifactId>
 			<version>4.6.0</version>
-			<!-- use the same version as your Camel core version -->
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
 			<version>4.0.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -55,5 +53,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
