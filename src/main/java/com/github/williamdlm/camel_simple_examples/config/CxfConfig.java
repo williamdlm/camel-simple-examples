@@ -22,12 +22,12 @@ public class CxfConfig {
         this.helloService = helloService;
     }
 
-    @Bean
-    public Endpoint endpoint() {
-        EndpointImpl endpoint = new EndpointImpl(bus, helloService);
-        endpoint.publish("/hello");
-        return endpoint;
-    }
+//    @Bean
+//    public Endpoint endpoint() {
+//        EndpointImpl endpoint = new EndpointImpl(bus, helloService);
+//        endpoint.publish("/hello");
+//        return endpoint;
+//    }
 
     @Bean
     public CxfEndpoint helloEndpoint() {
