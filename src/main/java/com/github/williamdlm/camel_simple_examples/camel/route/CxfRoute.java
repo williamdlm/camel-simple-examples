@@ -1,6 +1,6 @@
 package com.github.williamdlm.camel_simple_examples.camel.route;
 
-import com.github.williamdlm.camel_simple_examples.soap.HelloServiceImpl;
+import com.github.williamdlm.camel_simple_examples.soap.HelloService;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +16,10 @@ public class CxfRoute extends RouteBuilder {
                 .log("Response: ${body}");
 
 
-        from("cxf:/hello?serviceClass=" + HelloServiceImpl.class.getName())
+        from("cxf:/hello?serviceClass=" + HelloService.class.getName())
                 .routeId("helloRoute")
-                .log("someAddress Way");
+                .log("someAddress Way")
+                .to("bean:helloServiceImpl?method=sayHello");
 
     }
 }
