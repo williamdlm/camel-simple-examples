@@ -2,6 +2,7 @@ package com.github.williamdlm.camel_simple_examples.config;
 
 import com.github.williamdlm.camel_simple_examples.soap.HelloService;
 import jakarta.xml.ws.Endpoint;
+import org.apache.camel.component.cxf.common.DataFormat;
 import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.jaxws.EndpointImpl;
@@ -22,18 +23,27 @@ public class CxfConfig {
         this.helloService = helloService;
     }
 
-//    @Bean
-//    public Endpoint endpoint() {
-//        EndpointImpl endpoint = new EndpointImpl(bus, helloService);
-//        endpoint.publish("/hello");
-//        return endpoint;
-//    }
+    @Bean
+    public Endpoint endpoint() {
+        EndpointImpl endpoint = new EndpointImpl(bus, helloService);
+        endpoint.publish("/hello");
+        return endpoint;
+    }
 
     @Bean
     public CxfEndpoint helloEndpoint() {
         CxfEndpoint cxfEndpoint = new CxfEndpoint();
         cxfEndpoint.setAddress("/hi");
         cxfEndpoint.setServiceClass(HelloService.class);
+        return cxfEndpoint;
+    }
+
+
+    @Bean
+    public CxfEndpoint producerCxf() {
+        CxfEndpoint cxfEndpoint = new CxfEndpoint();
+        cxfEndpoint.setWsdlURL("http://localhost:8081/services/soap?wsdl");
+        cxfEndpoint.setDataFormat(DataFormat.RAW);
         return cxfEndpoint;
     }
 }

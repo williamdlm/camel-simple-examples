@@ -21,5 +21,24 @@ public class CxfRoute extends RouteBuilder {
                 .log("someAddress Way")
                 .to("bean:helloServiceImpl?method=sayHello");
 
+        from("timer:mytimer?period=10s&delay=5s")
+                .to("direct:start");
+
+        from("direct:start")
+//                    .setHeader(CxfConstants.OPERATION_NAME, constant("sayName"))
+//                    .setHeader(CxfConstants.OPERATION_NAMESPACE, constant("http://service.williamdlm.github.com/"))
+//                    .setHeader("soapAction", constant("http://service.williamdlm.github.com/Introduce/sayName"))
+                .setBody(constant("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.williamdlm.github.com/\">" +
+                        "   <soapenv:Header/>" +
+                        "   <soapenv:Body>" +
+                        "      <ser:sayName>" +
+                        "         <arg0>William Mota</arg0>" +
+                        "      </ser:sayName>" +
+                        "   </soapenv:Body>" +
+                        "</soapenv:Envelope>"))
+                .to("cxf:bean:producerCxf")
+                .log("Response: ${body}");
+
+
     }
 }
